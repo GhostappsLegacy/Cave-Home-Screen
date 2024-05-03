@@ -1,17 +1,21 @@
-
 {
-  "short_name": "TestApp",
-  "name": "Testing Offline App Capabilities",
+  "short_name": "WebApp",
+  "name": "Progressive Web App",
   "icons": [
     {
-      "src": "icons/icon-192x192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "icons/lowres.webp",
+      "sizes": "48x48",
+      "type": "image/webp"
+    },
+    {
+      "src": "icons/hd_hi.ico",
+      "sizes": "72x72 96x96 128x128 256x256",
+      "type": "image/x-icon"
     }
   ],
   "start_url": "index.html",
-  "background_color": "#000000",
+  "background_color": "#161616",
   "display": "standalone",
-  "scope": ".",
-  "theme_color": "#000000"
+  "scope": "/",
+  "theme_color": "#161616"
 }
