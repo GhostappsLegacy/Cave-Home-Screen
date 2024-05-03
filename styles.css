@@ -1,0 +1,60 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevents overall page scroll */
+    background-color: #161616;
+}
+
+.container {
+    position: relative; /* Needed for absolute positioning inside */
+    height: 100vh; /* Ensures container is exactly the height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    overflow-y: auto; /* Enables vertical scrolling within this div only */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+    flex-grow: 1;
+    padding: 0 14px; /* Uniform padding for all children */
+    padding-bottom: 90px; /* Keeps bottom padding to prevent overlap with the dock */
+}
+
+.top-container {
+    background-color: #272727;
+    height: 100px;
+    border-radius: 18px;
+    margin-top: 14px; /* Top margin for space from content's start */
+    margin-bottom: 14px; /* Bottom margin for space before app-grid */
+}
+
+.app-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0; /* No additional margin to maintain uniform padding influence */
+}
+
+.app-button {
+    background-color: #272727;
+    width: 72px;
+    height: 72px;
+    margin: 14px;
+    border-radius: 18px;
+    border: none;
+}
+
+.dock {
+    background-color: #272727;
+    height: 80px;
+    border-radius: 30px;
+    padding: 10px;
+    position: fixed; /* Keeps the dock at the bottom */
+    left: 14px; /* Consistent margin from the left */
+    right: 14px; /* Consistent margin from the right, helps in automatic centering */
+    bottom: 14px; /* Margin from the bottom */
+    box-shadow: none;
+    z-index: 1000; /* Ensures it stays above all other content */
+}
