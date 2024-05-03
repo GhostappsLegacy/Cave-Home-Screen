@@ -18,28 +18,32 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Failed to find the content element');
         return;
     }
+    
+    let startY = 0;
+    let isTouching = false;
 
+    // Better to attach these event listeners once outside of touchstart
     content.addEventListener('touchstart', (e) => {
-        let startY = e.touches[0].clientY;
-        let isTouching = true;
-
-        content.addEventListener('touchmove', (e) => {
-            if (!isTouching) return;
-            const moveY = e.touches[0].clientY;
-            const diffY = moveY - startY;
-            if (diffY > 0) {
-                const resistance = diffY / 4;
-                content.style.transform = `translateY(${resistance}px)`;
-                content.style.transition = '';
-            }
-        }, { passive: true });
-
-        content.addEventListener('touchend', () => {
-            isTouching = false;
-            content.style.transition = 'transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)';
-            content.style.transform = 'translateY(0px)';
-        });
+        startY = e.touches[0].clientY;
+        isTouching = true;  // Only set this true here
     }, { passive: true });
+
+    content.addEventListener('touchmove', (e) => {
+        if (!isTouching) return;
+        const moveY = e.touches[0].clientY;
+        const diffY = moveY - startY;
+        if (diffY > 0) {
+            const resistance = diffY / 4; // Calculating resistance
+            content.style.transform = `translateY(${resistance}px)`;
+            content.style.transition = 'none';  // Clear transitions during move
+        }
+    }, { passive: true });
+
+    content.addEventListener('touchend', () => {
+        isTouching = false;
+        content.style.transition = 'transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)';
+        content.style.transform = 'translateY(0px)';
+    });
 });
 </script>
 </head>
