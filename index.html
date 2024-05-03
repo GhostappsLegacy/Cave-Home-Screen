@@ -1,55 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<title>iPhone Home Screen Web App</title>
-<link rel="stylesheet" href="styles.css">
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const content = document.querySelector('.content');
-    let startY = 0;
-    let isTouching = false;
-
-    content.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
-        isTouching = true;
-        content.style.transition = ''; // Clear any transitions to allow for immediate response
-    }, { passive: true });
-
-    content.addEventListener('touchmove', (e) => {
-        if (!isTouching) return;
-        const moveY = e.touches[0].clientY;
-        const diffY = moveY - startY;
-        if (diffY > 0) { // only when pulling down
-            const resistance = diffY / 4; // Increasing the divisor will increase resistance
-            content.style.transform = `translateY(${resistance}px)`;
-        }
-    }, { passive: true });
-
-    content.addEventListener('touchend', () => {
-        isTouching = false;
-        content.style.transition = 'transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)'; // Smoother transition on release
-        content.style.transform = 'translateY(0px)';
-    });
-});
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <title>Test PWA Offline</title>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <div class="top-container"></div>
-            <div class="app-grid">
-                <button class="app-button"></button>
-                <button class="app-button"></button>
-                <button class="app-button"></button>                                 
-                <button class="app-button"></button>
-                <button class="app-button"></button>
-                <!-- Adjust number of buttons as needed -->
-            </div>
-        </div>
-        <div class="dock"></div>
-    </div>
+  <h1>Testing PWA Offline Capabilities</h1>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(reg => console.log('Service Worker: Registered'))
+          .catch(err => console.log(`Service Worker: Error: ${err}`));
+      });
+    }
+  </script>
 </body>
 </html>
