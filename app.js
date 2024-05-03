@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let startY = 0;
     let isTouching = false;
 
+   document.addEventListener('DOMContentLoaded', () => {
+    const content = document.querySelector('.content');
+    let startY = 0;
+    let isTouching = false;
+
     content.addEventListener('touchstart', (e) => {
         startY = e.touches[0].clientY;
         isTouching = true;
