@@ -1,30 +1,25 @@
-const CACHE_NAME = 'offline-test';
-const urlsToCache = [
-  'index.html',
-  'styles.css',
-  '/icons/icon-192x192.png'
+const cacheName = 'v1';
+const assetsToCache = [
+    'index.html',
+    'styles.css',
+    '/path/to/your/logo.png',  // Ensure you list all essential assets here
+    'app.js'
 ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
-      })
-  );
+self.addEventListener('install', event => {
+    event.waitUntil(
+        caches.open(cacheName)
+            .then(cache => {
+                console.log('Caching all the files');
+                return cache.addAll(assetsToCache);
+            })
+    );
 });
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return the response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
+self.addEventListener('fetch', event => {
+    event.respondWith(
+        caches.match(event.request).then(response => {
+            return response || fetch(event.request);
+        })
+    );
 });
