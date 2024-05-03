@@ -6,48 +6,12 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>iPhone Home Screen Web App</title>
 <link rel="stylesheet" href="styles.css">
-<link rel="manifest" href="manifest.json"> <!-- Link to the Web App Manifest -->
-<script>
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/service-worker.js') // Register the service worker
-        .then(function(registration) {
-            console.log('Service Worker registered with scope:', registration.scope);
-        }, function(err) {
-            console.log('Service Worker registration failed:', err);
-        });
-    });
-}
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const content = document.querySelector('.content');
-    let startY = 0;
-    let isTouching = false;
-
-    content.addEventListener('touchstart', (e) => {
-        startY = e.touches[0].clientY;
-        isTouching = true;
-        content.style.transition = ''; // Clear any transitions to allow for immediate response
-    }, { passive: true });
-
-    content.addEventListener('touchmove', (e) => {
-        if (!isTouching) return;
-        const moveY = e.touches[0].clientY;
-        const diffY = moveY - startY;
-        if (diffY > 0) { // only when pulling down
-            const resistance = diffY / 4; // Increasing the divisor will increase resistance
-            content.style.transform = `translateY(${resistance}px)`;
-        }
-    }, { passive: true });
-
-    content.addEventListener('touchend', () => {
-        isTouching = false;
-        content.style.transition = 'transform 0.5s cubic-bezier(0.33, 1, 0.68, 1)'; // Smoother transition on release
-        content.style.transform = 'translateY(0px)';
-    });
-});
-</script>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="120x120" href="https://raw.githubusercontent.com/GhostappsLegacy/Cave-Home-Screen/main/caveicon%20120%20%C3%97%20120.jpeg">
+<link rel="apple-touch-icon" sizes="152x152" href="https://raw.githubusercontent.com/GhostappsLegacy/Cave-Home-Screen/main/caveicon%20152%20%C3%97%20152.jpeg">
+<link rel="apple-touch-icon" sizes="180x180" href="https://github.com/GhostappsLegacy/Cave-Home-Screen/blob/main/Caveicon%20180%20×%20180.jpeg?raw=true">
+<link rel="apple-touch-icon" sizes="192x192" href="https://raw.githubusercontent.com/GhostappsLegacy/Cave-Home-Screen/main/caveicon%20192%20%C3%97%20192.jpeg">
+<script src="app.js"></script>
 </head>
 <body>
     <div class="container">
